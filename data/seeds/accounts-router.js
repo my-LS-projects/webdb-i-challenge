@@ -53,6 +53,8 @@ router.delete('/:id', ( req, res ) => {
 function validateAccount(req, res, next) {
   if (!req.body.name || !req.body.budget){
     res.status(404).json({ message: "Please include a name and budget" })
+  } else if (typeof req.body.budget != 'number'){
+    return res.status(404).json({ message: "Please make sure budget is a number" })
   } else {
     next()
   }
