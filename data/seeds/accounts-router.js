@@ -41,6 +41,14 @@ router.put("/:id", (req, res) => {
     .catch(error => res.status(500).json({ error: "Could not update account" }))
 });
 
+router.delete('/:id', ( req, res ) => {
+    knex('accounts')
+      .where({ id: req.params.id })
+      .del()
+      .then(account => res.status(200).json({ message:"Account deleted" }))
+      .catch(error => res.status(500).json({ error: "Could not delete account" }))
+    
+})
 
 function validateAccount(req, res, next) {
   if (!req.body.name || !req.body.budget){
